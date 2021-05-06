@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SORtING VISuALIZER</title>
+	<link rel="stylesheet" type="text/css" href="./style.css">
+	<!-- <meta http-equiv="refresh" content = '50000'> -->
+</head>
+<body>
+	<div>
+		<h1 class = 'head'>Sorting Visualizer</h1>
+	</div>
+	<div class = 'gr-btn'>
+		<button class = 'btn'>new array</button>
+	</div>
+	<div class = 'sort-btn'>
+		<button class = 'btn' id = 'bubble'>Bubble Sort</button>
+		<button class = 'btn' id = 'selection'>Selection Sort</button>
+		<button class = 'btn' id = 'insertion'>Insertion Sort</button>
+		<button class = 'btn' id = 'quick'>Quick Sort</button>
+		<button class = 'btn' id = 'merge'>Merge Sort</button>
+	</div>
+	<div class = 'visual'>
+	</div>
+	<span>
+            <input class ="arr_sz" type="range"  min=10 max=100 step=1 value=50>
+    </span>
+    <span>
+            <input class ="speed_sz" type="range"  min=0.01 max=300 step=0.5 value=10>
+    </span>
+	<script type="text/javascript" src = "main.js"></script>
+</body>
+</html>
