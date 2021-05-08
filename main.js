@@ -1,5 +1,7 @@
 var new_array = document.querySelector('.gr-btn').querySelector('button');
 var bubble_sort = document.querySelector('.sort-btn').querySelector('#bubble');
+var selection_sort = document.querySelector('.sort-btn').querySelector('#selection');
+var insertion_sort = document.querySelector('.sort-btn').querySelector('#insertion');
 var arr_size=document.querySelector(".arr_sz"); 
 var speed = document.querySelector(".speed_sz");
 
@@ -60,7 +62,6 @@ function delayit(ms){
 
 //============================================BUBBLE SORT==================================================================
 async function bubblesort(delaytime){
-	console.log(delaytime);
 	var swaps = 0;
 	var listing = document.querySelector('.visual').querySelectorAll('div');
 	var position_sorted = listing.length-1;
@@ -93,9 +94,68 @@ async function bubblesort(delaytime){
 		{break;}
 	}
 } 
+//=====================================SELECTION SORT==============================================
+async function selectionsort(delaytime){
+	var listing = document.querySelector('.visual').querySelectorAll('div');
+	for(i = 0; i<listing.length; i++)
+	{
+		listing[i].style.background = 'yellow';
+		await delayit(delaytime/2);
+		var min_value = 1000;
+		var min_index = i;
+		for(j = i+1; j<listing.length; j++)
+		{
+			const val1 = window.getComputedStyle(listing[j]).getPropertyValue("height");
+			if(parseInt(val1) < min_value)
+			{
+				min_value = parseInt(val1);
+				min_index = j;
+			}
+		}
+		listing[min_index].style.background = 'yellow';
+		await delayit(delaytime);
+		const val2 = window.getComputedStyle(listing[i]).getPropertyValue("height");
+		if(parseInt(val2) > min_value)
+		{
+			listing[i].style.height = min_value+'px';
+			listing[min_index].style.height = val2;
+		}
+		listing[i].style.background = 'green';
+		listing[min_index].style.background = 'white';
+		await delayit(delaytime/4);
+	}
+}
+
+//=========================================INSERTION SORT======================================================
+
+async function insertionsort(delaytime){
+	var listing = document.querySelector('.visual').querySelectorAll('div');
+	for(i = 1; i<listing.length; i++)
+	{
+		listing[i].style.background = 'gray';
+		await delayit(delaytime);
+		const val1 = window.getComputedStyle(listing[i]).getPropertyValue("height");
+		var key = parseInt(val1);
+		var j = i-1;
+		while(j >= 0 && parseInt(window.getComputedStyle(listing[j]).getPropertyValue("height")) > key)
+		{
+			listing[j+1].style.background = 'yellow';
+			listing[j].style.background = 'yellow';
+			await delayit(delaytime/2);
+			listing[j+1].style.height = listing[j].style.height;
+			listing[j+1].style.background = 'white';
+			listing[j].style.background = 'white';
+			j-=1;
+		}
+		listing[j+1].style.height = key+'px';
+
+	}
+}
 
 
 
 initialise_array(arr_size.value);
 bubble_sort.addEventListener('click' ,()=>{bubblesort((speed.value)*10);});
+selection_sort.addEventListener('click' ,()=>{selectionsort((speed.value)*10);});
+insertion_sort.addEventListener('click' ,()=>{insertionsort((speed.value)*10);});
 arr_size.addEventListener('input' , ()=>{initialise_array(arr_size.value);});
